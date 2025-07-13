@@ -1,5 +1,3 @@
-// script.js
-
 // تخزين البيانات
 let sessions = [];
 let isTracking = false;
@@ -20,7 +18,7 @@ loadFromLocalStorage();
 renderTable();
 updateTotalTime();
 
-// عند الضغط على زر التشغيل/الإيقاف
+// زر التشغيل/الإيقاف
 toggleBtn.addEventListener("click", () => {
   if (!isTracking) {
     startTracking();
@@ -128,7 +126,7 @@ exportBtn.addEventListener("click", () => {
   XLSX.writeFile(wb, "work-log.xlsx");
 });
 
-// Google Calendar
+// إرسال إلى Google Calendar عبر رابط مباشر
 const sendCalBtn = document.getElementById("send-calendar");
 sendCalBtn.addEventListener("click", () => {
   if (!sessions.length) {
@@ -149,37 +147,3 @@ sendCalBtn.addEventListener("click", () => {
 
   window.open(url, "_blank");
 });
-
-
-function sendEventToCalendar() {
-  if (!sessions.length) return alert("لا يوجد أي جلسات مسجلة اليوم.");
-
-  const first = new Date(sessions[0].start);
-  const last = new Date(sessions[sessions.length - 1].end);
-  const total = sessions.reduce((acc, s) => acc + s.duration, 0);
-
-  const event = {
-    summary: "ساعات العمل اليوم",
-    description: `المدة الكلية: ${formatDuration(total)}`,
-    start: {
-      dateTime: first.toISOString(),
-      timeZone: "Africa/Algiers"
-    },
-    end: {
-      dateTime: last.toISOString(),
-      timeZone: "Africa/Algiers"
-    }
-  };
-
-  gapi.client.load("calendar", "v3", () => {
-    gapi.client.calendar.events.insert({
-      calendarId: "primary",
-      resource: event
-    }).then(() => {
-      alert("✅ تم إرسال السجل إلى تقويم Google بنجاح!");
-    }, (err) => {
-      console.error("فشل إرسال الحدث:", err);
-      alert("❌ حدث خطأ أثناء إرسال السجل.");
-    });
-  });
-}
