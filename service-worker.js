@@ -6,7 +6,6 @@ const DATA_CACHE_NAME = 'work-tracker-data-cache-v1';
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
-  '/style.css',
   '/script.js',
   '/manifest.json',
   '/assets/icon-144x144.png',
