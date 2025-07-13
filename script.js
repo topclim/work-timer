@@ -82,7 +82,17 @@ function updateTotalTime() {
 
 function renderTable() {
   logTableBody.innerHTML = "";
-  sessions.forEach(s => {
+
+  // إذا فيه تاريخ محدد، فلتر السجلات حسبه
+  const selectedDate = filterDateInput.value;
+  const filteredSessions = selectedDate
+    ? sessions.filter(s => {
+        const date = new Date(s.start);
+        return date.toISOString().split('T')[0] === selectedDate;
+      })
+    : sessions;
+
+  filteredSessions.forEach(s => {
     const tr = document.createElement("tr");
     const tdStart = document.createElement("td");
     const tdEnd = document.createElement("td");
@@ -95,7 +105,12 @@ function renderTable() {
     tr.append(tdStart, tdEnd, tdDuration);
     logTableBody.appendChild(tr);
   });
+
+  // تحديث الوقت الإجمالي للنتائج المعروضة فقط
+  const total = filteredSessions.reduce((acc, s) => acc + s.duration, 0);
+  totalTime.textContent = formatDuration(total);
 }
+
 
 function saveToLocalStorage() {
   localStorage.setItem("work_sessions", JSON.stringify(sessions));
@@ -146,4 +161,9 @@ sendCalBtn.addEventListener("click", () => {
   const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${summary}&dates=${startStr}/${endStr}&details=${details}&ctz=Africa/Algiers`;
 
   window.open(url, "_blank");
+});
+
+const filterDateInput = document.getElementById("filter-date");
+filterDateInput.addEventListener("change", () => {
+  renderTable(); // يعيد عرض الجدول حسب التاريخ المختار
 });
