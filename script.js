@@ -131,20 +131,25 @@ exportBtn.addEventListener("click", () => {
 // Google Calendar
 const sendCalBtn = document.getElementById("send-calendar");
 sendCalBtn.addEventListener("click", () => {
-  gapi.load("client:auth2", () => {
-    gapi.client.init({
-      clientId: "1095113464538-nskna9nava9td9vdo7pto4vvlma1hcmq.apps.googleusercontent.com",
-      scope: "https://www.googleapis.com/auth/calendar.events"
-    }).then(() => {
-      const auth = gapi.auth2.getAuthInstance();
-      if (!auth.isSignedIn.get()) {
-        auth.signIn().then(sendEventToCalendar);
-      } else {
-        sendEventToCalendar();
-      }
-    });
-  });
+  if (!sessions.length) {
+    alert("لا يوجد أي جلسات مسجلة اليوم.");
+    return;
+  }
+
+  const first = new Date(sessions[0].start);
+  const last = new Date(sessions[sessions.length - 1].end);
+  const total = sessions.reduce((acc, s) => acc + s.duration, 0);
+
+  const startStr = first.toISOString().replace(/-|:|\.\d\d\d/g, "");
+  const endStr = last.toISOString().replace(/-|:|\.\d\d\d/g, "");
+  const summary = encodeURIComponent("ساعات العمل اليوم");
+  const details = encodeURIComponent("المدة الكلية: " + formatDuration(total));
+
+  const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${summary}&dates=${startStr}/${endStr}&details=${details}&ctz=Africa/Algiers`;
+
+  window.open(url, "_blank");
 });
+
 
 function sendEventToCalendar() {
   if (!sessions.length) return alert("لا يوجد أي جلسات مسجلة اليوم.");
