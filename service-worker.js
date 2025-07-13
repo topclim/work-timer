@@ -4,11 +4,11 @@ const CACHE_NAME = 'work-tracker-cache-v1';
 const DATA_CACHE_NAME = 'work-tracker-data-cache-v1';
 
 const FILES_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/script.js',
-  '/manifest.json',
-  '/assets/icon-144x144.png',
+'/work-timer/',
+  '/work-timer/index.html',
+  '/work-timer/script.js',
+  '/work-timer/manifest.json',
+  '/work-timer/assets/icon-144x144.png',
 
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css',
