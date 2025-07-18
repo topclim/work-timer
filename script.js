@@ -9,6 +9,7 @@ const liveTimer = document.getElementById("live-timer");
 const totalTime = document.getElementById("total-time");
 const logTableBody = document.getElementById("log-table-body");
 const statusEl = document.getElementById("status");
+const filterDateInput = document.getElementById("filter-date");
 
 // مؤقت العرض المباشر
 let liveInterval = null;
@@ -163,7 +164,7 @@ sendCalBtn.addEventListener("click", () => {
   window.open(url, "_blank");
 });
 
-const filterDateInput = document.getElementById("filter-date");
+
 filterDateInput.addEventListener("change", () => {
   renderTable(); // يعيد عرض الجدول حسب التاريخ المختار
 });
