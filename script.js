@@ -194,3 +194,15 @@ function checkPendingSessions() {
     }
   }
 }
+
+const deleteBtn = document.getElementById("delete-sessions");
+deleteBtn.addEventListener("click", () => {
+  if (confirm("هل أنت متأكد من حذف جميع جلسات اليوم؟")) {
+    const today = new Date().toISOString().split("T")[0];
+    sessions = sessions.filter(s => new Date(s.start).toISOString().split("T")[0] !== today);
+    saveToLocalStorage();
+    renderTable();
+    updateTotalTime();
+    alert("🗑️ تم حذف جلسات اليوم بنجاح.");
+  }
+});
