@@ -175,3 +175,22 @@ sendCalBtn.addEventListener("click", () => {
 filterDateInput.addEventListener("change", () => {
   renderTable(); // يعيد عرض الجدول حسب التاريخ المختار
 });
+
+// التحقق كل مرة عند تحميل الصفحة
+checkPendingSessions();
+
+function checkPendingSessions() {
+  const today = new Date().toISOString().split("T")[0];
+  const lastSentDate = localStorage.getItem("calendar_sent");
+
+  // إذا مرت 24 ساعة ولم يتم الإرسال
+  if (lastSentDate !== today) {
+    const hasSessionsToday = sessions.some(s => {
+      return new Date(s.start).toISOString().split("T")[0] === today;
+    });
+
+    if (hasSessionsToday) {
+      alert("⚠️ لم تقم بإرسال جلسات اليوم إلى تقويم Google.");
+    }
+  }
+}
