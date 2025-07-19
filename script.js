@@ -19,6 +19,13 @@ loadFromLocalStorage();
 renderTable();
 updateTotalTime();
 
+const filterDateInput = document.getElementById("filter-date");
+
+// تعيين تاريخ اليوم تلقائيًا عند التشغيل
+const today = new Date().toISOString().split("T")[0];
+filterDateInput.value = today;
+
+
 // زر التشغيل/الإيقاف
 toggleBtn.addEventListener("click", () => {
   if (!isTracking) {
