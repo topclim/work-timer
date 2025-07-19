@@ -12,20 +12,6 @@
   "prefer_related_applications": false,
   "scope": ".",
   "id": "/index.html",
-  "screenshots": [
-    {
-      "src": "assets/screenshot1.png",
-      "type": "image/png",
-      "sizes": "540x960",
-      "label": "شاشة تتبع الوقت"
-    },
-    {
-      "src": "assets/screenshot2.png",
-      "type": "image/png",
-      "sizes": "540x960",
-      "label": "سجل الجلسات اليومية"
-    }
-  ],
   "related_applications": [],
   "categories": ["productivity", "time-tracker", "tools", "calendar"],
   "shortcuts": [
@@ -33,34 +19,19 @@
       "name": "بدء جلسة جديدة",
       "short_name": "بدء",
       "description": "ابدأ تسجيل وقت العمل مباشرة",
-      "url": "index.html#start",
-      "icons": [{
-        "src": "assets/start.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }]
+      "url": "index.html#start"
     },
     {
       "name": "تصدير إلى Excel",
       "short_name": "Excel",
       "description": "قم بتصدير الجلسات إلى ملف Excel",
-      "url": "index.html#export",
-      "icons": [{
-        "src": "assets/excel.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }]
+      "url": "index.html#export"
     },
     {
       "name": "إرسال إلى تقويم Google",
       "short_name": "التقويم",
       "description": "أرسل الجلسات إلى تقويمك الشخصي",
-      "url": "index.html#calendar",
-      "icons": [{
-        "src": "assets/calendar.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }]
+      "url": "index.html#calendar"
     }
   ],
   "icons": [
